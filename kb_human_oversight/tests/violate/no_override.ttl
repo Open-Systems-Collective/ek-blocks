@@ -1,0 +1,30 @@
+@prefix ex:  <http://example.org/okb#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# -----------------------------------------------------------------------------
+# Non-conformant evidence graph: missing override capability
+# This graph should FAIL validation, triggering exactly one violation
+# on ex:OverrideRequiredShape (Art. 14.4d).
+# -----------------------------------------------------------------------------
+
+# ---- The AI decision (no ex:hasOverrideCapability link) ---------------------
+
+ex:decision-2026-0099
+    a ex:Decision ;
+    ex:hasOversightRecord ex:oversight-rec-099 ;
+    ex:hasSystemDescription ex:sys-desc-099 .
+
+# ---- Human oversight record (complete) --------------------------------------
+
+ex:oversight-rec-099
+    a ex:HumanOversightRecord ;
+    ex:oversightTimestamp "2026-03-27T09:15:00Z"^^xsd:dateTime ;
+    ex:reviewerID "reviewer-john-smith-1182" ;
+    ex:oversightOutcome "approved" .
+
+# ---- AI system description (complete) ---------------------------------------
+
+ex:sys-desc-099
+    a ex:AISystemDescription ;
+    ex:capabilityDescription "Resume screening model v1.0: ranks job applicants by predicted suitability." ;
+    ex:limitationDescription "Model may exhibit bias for non-standard career paths. Not validated for executive-level roles." .

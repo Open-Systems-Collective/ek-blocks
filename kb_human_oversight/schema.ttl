@@ -1,0 +1,110 @@
+@prefix ex:   <http://example.org/okb#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# -----------------------------------------------------------------------------
+# OKB Schema: Human Oversight (EU AI Act Article 14)
+# -----------------------------------------------------------------------------
+
+<http://example.org/okb>
+    a owl:Ontology ;
+    rdfs:label "Human Oversight OKB Schema" ;
+    rdfs:comment "RDF/OWL vocabulary for human oversight obligations under EU AI Act Article 14." .
+
+# ---- Classes ----------------------------------------------------------------
+
+ex:Decision
+    a owl:Class ;
+    rdfs:label "Decision" ;
+    rdfs:comment "An AI-generated decision subject to human oversight requirements." .
+
+ex:HumanOversightRecord
+    a owl:Class ;
+    rdfs:label "Human Oversight Record" ;
+    rdfs:comment "Evidence that a qualified human reviewed an AI decision (Art. 14.1)." .
+
+ex:OverrideCapability
+    a owl:Class ;
+    rdfs:label "Override Capability" ;
+    rdfs:comment "Evidence that a mechanism exists for a human to override or reverse an AI decision (Art. 14.4d)." .
+
+ex:AISystemDescription
+    a owl:Class ;
+    rdfs:label "AI System Description" ;
+    rdfs:comment "Documentation of the AI system capabilities and limitations provided to the human operator (Art. 14.4a)." .
+
+# ---- Object Properties ------------------------------------------------------
+
+ex:hasOversightRecord
+    a owl:ObjectProperty ;
+    rdfs:label "has oversight record" ;
+    rdfs:domain ex:Decision ;
+    rdfs:range ex:HumanOversightRecord ;
+    rdfs:comment "Links a decision to its human oversight record." .
+
+ex:hasOverrideCapability
+    a owl:ObjectProperty ;
+    rdfs:label "has override capability" ;
+    rdfs:domain ex:Decision ;
+    rdfs:range ex:OverrideCapability ;
+    rdfs:comment "Links a decision to evidence of override or reversal capability." .
+
+ex:hasSystemDescription
+    a owl:ObjectProperty ;
+    rdfs:label "has system description" ;
+    rdfs:domain ex:Decision ;
+    rdfs:range ex:AISystemDescription ;
+    rdfs:comment "Links a decision to the AI system description available to the operator." .
+
+# ---- Datatype Properties -----------------------------------------------------
+
+ex:oversightTimestamp
+    a owl:DatatypeProperty ;
+    rdfs:label "oversight timestamp" ;
+    rdfs:domain ex:HumanOversightRecord ;
+    rdfs:range xsd:dateTime ;
+    rdfs:comment "Date and time when human oversight was performed." .
+
+ex:reviewerID
+    a owl:DatatypeProperty ;
+    rdfs:label "reviewer ID" ;
+    rdfs:domain ex:HumanOversightRecord ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Identifier of the human reviewer who performed oversight." .
+
+ex:oversightOutcome
+    a owl:DatatypeProperty ;
+    rdfs:label "oversight outcome" ;
+    rdfs:domain ex:HumanOversightRecord ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Result of the oversight review: approved, rejected, or escalated." .
+
+ex:overrideMechanism
+    a owl:DatatypeProperty ;
+    rdfs:label "override mechanism" ;
+    rdfs:domain ex:OverrideCapability ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Description of the mechanism by which a human can override the AI decision." .
+
+ex:overrideAvailable
+    a owl:DatatypeProperty ;
+    rdfs:label "override available" ;
+    rdfs:domain ex:OverrideCapability ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "Whether the override mechanism was available at the time of the decision." .
+
+ex:capabilityDescription
+    a owl:DatatypeProperty ;
+    rdfs:label "capability description" ;
+    rdfs:domain ex:AISystemDescription ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Description of the AI system capabilities communicated to the operator." .
+
+ex:limitationDescription
+    a owl:DatatypeProperty ;
+    rdfs:label "limitation description" ;
+    rdfs:domain ex:AISystemDescription ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Description of the AI system limitations communicated to the operator." .

@@ -1,0 +1,37 @@
+@prefix ex:  <http://example.org/okb#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# -----------------------------------------------------------------------------
+# Conformant evidence graph: a fully compliant AI decision
+# This graph should PASS validation against all SHACL shapes.
+# -----------------------------------------------------------------------------
+
+# ---- The AI decision --------------------------------------------------------
+
+ex:decision-2026-0042
+    a ex:Decision ;
+    ex:hasOversightRecord ex:oversight-rec-001 ;
+    ex:hasOverrideCapability ex:override-cap-001 ;
+    ex:hasSystemDescription ex:sys-desc-001 .
+
+# ---- Human oversight record (Art. 14.1 / 14.4b) ----------------------------
+
+ex:oversight-rec-001
+    a ex:HumanOversightRecord ;
+    ex:oversightTimestamp "2026-03-28T14:30:00Z"^^xsd:dateTime ;
+    ex:reviewerID "reviewer-jane-doe-4417" ;
+    ex:oversightOutcome "approved" .
+
+# ---- Override capability (Art. 14.4d) ---------------------------------------
+
+ex:override-cap-001
+    a ex:OverrideCapability ;
+    ex:overrideMechanism "Manual override button in operator dashboard; decision can be reversed within 24 hours via case management system." ;
+    ex:overrideAvailable "true"^^xsd:boolean .
+
+# ---- AI system description (Art. 14.4a) ------------------------------------
+
+ex:sys-desc-001
+    a ex:AISystemDescription ;
+    ex:capabilityDescription "Credit scoring model v3.2: evaluates applicant creditworthiness using income, employment history, and repayment records. Accuracy on validation set: 91.3%." ;
+    ex:limitationDescription "Model has reduced accuracy for applicants with fewer than 2 years of credit history. Not validated for self-employed applicants." .

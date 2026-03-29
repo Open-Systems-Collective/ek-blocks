@@ -1,0 +1,30 @@
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+# -----------------------------------------------------------------------------
+# DCAT-AP Metadata: kb_human_oversight
+# -----------------------------------------------------------------------------
+
+<http://example.org/okb/kb_human_oversight>
+    a dcat:Dataset ;
+    dct:title "kb_human_oversight" ;
+    dct:description "Human oversight obligations for high-risk AI systems under EU AI Act Article 14" ;
+    dct:version "1.0.0" ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dct:publisher [
+        a foaf:Organization ;
+        foaf:name "Open Systems Collective" ;
+    ] ;
+    dct:issued "2026-03-29"^^xsd:date ;
+    dct:source <https://eur-lex.europa.eu/eli/reg/2024/1689/oj> ;
+    dct:references "EU AI Act Article 14: Human Oversight" ;
+    dcat:distribution [
+        a dcat:Distribution ;
+        dcat:mediaType "text/turtle" ;
+        dcat:downloadURL <http://example.org/okb/kb_human_oversight/schema.ttl> ;
+    ] ;
+    dcat:keyword "human oversight" , "EU AI Act" , "Article 14" , "high-risk AI" , "compliance" .

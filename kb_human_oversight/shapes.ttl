@@ -1,0 +1,84 @@
+@prefix ex:   <http://example.org/okb#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# -----------------------------------------------------------------------------
+# SHACL Shapes: Human Oversight (EU AI Act Article 14)
+# -----------------------------------------------------------------------------
+
+# ---- Shape 1: Every Decision must have a human oversight record (Art. 14.1) --
+
+ex:HumanOversightRequiredShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Decision ;
+    sh:property [
+        sh:path ex:hasOversightRecord ;
+        sh:minCount 1 ;
+        sh:message "EU AI Act Art.14.1: High-risk AI decision must have human oversight record [Art.14(1)]" ;
+    ] .
+
+# ---- Shape 2: Oversight record must be complete (Art. 14.4b) ----------------
+
+ex:OversightRecordShape
+    a sh:NodeShape ;
+    sh:targetClass ex:HumanOversightRecord ;
+    sh:property [
+        sh:path ex:oversightTimestamp ;
+        sh:minCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "EU AI Act Art.14.4(b): Oversight record must include a timestamp so the decision can be correctly interpreted [Art.14(4)(b)]" ;
+    ] ;
+    sh:property [
+        sh:path ex:reviewerID ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "EU AI Act Art.14.4(b): Oversight record must identify the human reviewer [Art.14(4)(b)]" ;
+    ] ;
+    sh:property [
+        sh:path ex:oversightOutcome ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "EU AI Act Art.14.4(b): Oversight record must include the review outcome [Art.14(4)(b)]" ;
+    ] .
+
+# ---- Shape 3: Every Decision must have override capability (Art. 14.4d) -----
+
+ex:OverrideRequiredShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Decision ;
+    sh:property [
+        sh:path ex:hasOverrideCapability ;
+        sh:minCount 1 ;
+        sh:message "EU AI Act Art.14.4(d): Override or reversal capability must be evidenced [Art.14(4)(d)]" ;
+    ] .
+
+# ---- Shape 4: Override capability must be fully described --------------------
+
+ex:OverrideCapabilityShape
+    a sh:NodeShape ;
+    sh:targetClass ex:OverrideCapability ;
+    sh:property [
+        sh:path ex:overrideMechanism ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Override capability must describe the mechanism available to the operator [Art.14(4)(d)]" ;
+    ] ;
+    sh:property [
+        sh:path ex:overrideAvailable ;
+        sh:minCount 1 ;
+        sh:datatype xsd:boolean ;
+        sh:message "Override capability must indicate whether override was available [Art.14(4)(d)]" ;
+    ] .
+
+# ---- Shape 5: Every Decision must link to a system description (Art. 14.4a) -
+
+ex:SystemDescriptionRequiredShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Decision ;
+    sh:property [
+        sh:path ex:hasSystemDescription ;
+        sh:minCount 1 ;
+        sh:message "EU AI Act Art.14.4(a): System capabilities and limitations must be documented [Art.14(4)(a)]" ;
+    ] .
