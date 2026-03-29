@@ -1,0 +1,47 @@
+@prefix ex:  <http://example.org/okb#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# -----------------------------------------------------------------------------
+# Conformant evidence graph: a fully compliant AI-assisted lung cancer diagnosis
+# This graph should PASS validation against all SHACL shapes.
+# -----------------------------------------------------------------------------
+
+# ---- The AI diagnostic recommendation --------------------------------------
+
+ex:diagnosis-2026-LC-0071
+    a ex:DiagnosticRecommendation ;
+    ex:icdOCode "8140/3 C34.1" ;
+    ex:recommendedAction "Refer for confirmatory biopsy and PET-CT staging" ;
+    ex:hasClinicalEvidence ex:evidence-nccn-nsclc ;
+    ex:hasUncertaintyReport ex:uncertainty-001 ;
+    ex:hasPatientCohort ex:cohort-lung-training ;
+    ex:hasClinicalReview ex:review-001 .
+
+# ---- Clinical evidence (MDR 2017/745 Annex XV) -----------------------------
+
+ex:evidence-nccn-nsclc
+    a ex:ClinicalEvidence ;
+    ex:evidenceSource "https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1450"^^xsd:anyURI ;
+    ex:evidenceLevel "Level I" .
+
+# ---- Uncertainty report (FDA CDS Guidance) ----------------------------------
+
+ex:uncertainty-001
+    a ex:UncertaintyReport ;
+    ex:confidenceScore "0.87"^^xsd:decimal ;
+    ex:uncertaintyMethod "Ensemble Variance" .
+
+# ---- Patient cohort description (WHO 2021, Sec.3.4) ------------------------
+
+ex:cohort-lung-training
+    a ex:PatientCohortDescription ;
+    ex:cohortSize "45000"^^xsd:integer ;
+    ex:cohortDescription "Multi-ethnic adult population, age 40-85, NLST and LIDC-IDRI datasets" .
+
+# ---- Clinical review record (MDR 2017/745 Art.14(3)) -----------------------
+
+ex:review-001
+    a ex:ClinicalReviewRecord ;
+    ex:reviewerQualification "Board-certified thoracic oncologist" ;
+    ex:reviewTimestamp "2026-03-28T10:45:00Z"^^xsd:dateTime ;
+    ex:reviewDecision "confirmed" .

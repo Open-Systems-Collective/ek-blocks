@@ -1,0 +1,152 @@
+@prefix ex:     <http://example.org/okb#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix snomed: <http://snomed.info/id/> .
+@prefix fhir:   <http://hl7.org/fhir/> .
+
+# -----------------------------------------------------------------------------
+# OKB Schema: Clinical Safety (EU MDR 2017/745, FDA CDS Guidance, WHO 2021)
+# -----------------------------------------------------------------------------
+
+<http://example.org/okb>
+    a owl:Ontology ;
+    rdfs:label "Clinical Safety OKB Schema" ;
+    rdfs:comment "RDF/OWL vocabulary for clinical safety obligations in AI-assisted oncology diagnosis under EU MDR 2017/745, FDA CDS Guidance, and WHO AI Health Ethics." .
+
+# ---- Classes ----------------------------------------------------------------
+
+ex:DiagnosticRecommendation
+    a owl:Class ;
+    rdfs:label "Diagnostic Recommendation" ;
+    rdfs:comment "An AI-generated diagnosis or treatment recommendation subject to clinical safety requirements." .
+
+ex:ClinicalEvidence
+    a owl:Class ;
+    rdfs:label "Clinical Evidence" ;
+    rdfs:comment "Reference to a clinical study, trial, or guideline backing the recommendation (MDR 2017/745 Annex XV)." .
+
+ex:UncertaintyReport
+    a owl:Class ;
+    rdfs:label "Uncertainty Report" ;
+    rdfs:comment "Confidence and uncertainty metrics for the AI recommendation (FDA CDS Guidance)." .
+
+ex:PatientCohortDescription
+    a owl:Class ;
+    rdfs:label "Patient Cohort Description" ;
+    rdfs:comment "Documentation of training population demographics (WHO 2021, Sec.3.4)." .
+
+ex:ClinicalReviewRecord
+    a owl:Class ;
+    rdfs:label "Clinical Review Record" ;
+    rdfs:comment "Evidence that a qualified clinician reviewed the recommendation before it is acted upon (MDR 2017/745 Art.14(3))." .
+
+# ---- Object Properties ------------------------------------------------------
+
+ex:hasClinicalEvidence
+    a owl:ObjectProperty ;
+    rdfs:label "has clinical evidence" ;
+    rdfs:domain ex:DiagnosticRecommendation ;
+    rdfs:range ex:ClinicalEvidence ;
+    rdfs:comment "Links a diagnostic recommendation to its supporting clinical evidence." .
+
+ex:hasUncertaintyReport
+    a owl:ObjectProperty ;
+    rdfs:label "has uncertainty report" ;
+    rdfs:domain ex:DiagnosticRecommendation ;
+    rdfs:range ex:UncertaintyReport ;
+    rdfs:comment "Links a diagnostic recommendation to its uncertainty or confidence report." .
+
+ex:hasPatientCohort
+    a owl:ObjectProperty ;
+    rdfs:label "has patient cohort" ;
+    rdfs:domain ex:DiagnosticRecommendation ;
+    rdfs:range ex:PatientCohortDescription ;
+    rdfs:comment "Links a diagnostic recommendation to the training population demographics." .
+
+ex:hasClinicalReview
+    a owl:ObjectProperty ;
+    rdfs:label "has clinical review" ;
+    rdfs:domain ex:DiagnosticRecommendation ;
+    rdfs:range ex:ClinicalReviewRecord ;
+    rdfs:comment "Links a diagnostic recommendation to a clinician review record." .
+
+# ---- Datatype Properties -----------------------------------------------------
+
+ex:evidenceSource
+    a owl:DatatypeProperty ;
+    rdfs:label "evidence source" ;
+    rdfs:domain ex:ClinicalEvidence ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "URI of the clinical evidence source, e.g., PubMed DOI or clinical guideline URL." .
+
+ex:evidenceLevel
+    a owl:DatatypeProperty ;
+    rdfs:label "evidence level" ;
+    rdfs:domain ex:ClinicalEvidence ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Level of evidence per Oxford CEBM, e.g., Level I, Level II." .
+
+ex:confidenceScore
+    a owl:DatatypeProperty ;
+    rdfs:label "confidence score" ;
+    rdfs:domain ex:UncertaintyReport ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Confidence score for the recommendation, range 0.0 to 1.0." .
+
+ex:uncertaintyMethod
+    a owl:DatatypeProperty ;
+    rdfs:label "uncertainty method" ;
+    rdfs:domain ex:UncertaintyReport ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Method used to compute uncertainty, e.g., Monte Carlo Dropout, Ensemble Variance." .
+
+ex:cohortSize
+    a owl:DatatypeProperty ;
+    rdfs:label "cohort size" ;
+    rdfs:domain ex:PatientCohortDescription ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Number of patients in the training cohort." .
+
+ex:cohortDescription
+    a owl:DatatypeProperty ;
+    rdfs:label "cohort description" ;
+    rdfs:domain ex:PatientCohortDescription ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Textual description of the training cohort demographics." .
+
+ex:reviewerQualification
+    a owl:DatatypeProperty ;
+    rdfs:label "reviewer qualification" ;
+    rdfs:domain ex:ClinicalReviewRecord ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Qualification of the clinician who reviewed the recommendation." .
+
+ex:reviewTimestamp
+    a owl:DatatypeProperty ;
+    rdfs:label "review timestamp" ;
+    rdfs:domain ex:ClinicalReviewRecord ;
+    rdfs:range xsd:dateTime ;
+    rdfs:comment "Date and time when the clinician review was performed." .
+
+ex:reviewDecision
+    a owl:DatatypeProperty ;
+    rdfs:label "review decision" ;
+    rdfs:domain ex:ClinicalReviewRecord ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Clinician review decision: confirmed, modified, or rejected." .
+
+ex:icdOCode
+    a owl:DatatypeProperty ;
+    rdfs:label "ICD-O code" ;
+    rdfs:domain ex:DiagnosticRecommendation ;
+    rdfs:range xsd:string ;
+    rdfs:comment "ICD-O morphology or topography code for the diagnosis." .
+
+ex:recommendedAction
+    a owl:DatatypeProperty ;
+    rdfs:label "recommended action" ;
+    rdfs:domain ex:DiagnosticRecommendation ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The treatment or follow-up action recommended by the AI system." .

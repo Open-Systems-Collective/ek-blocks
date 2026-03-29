@@ -1,0 +1,30 @@
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+# -----------------------------------------------------------------------------
+# DCAT-AP Metadata: kb_clinical_safety
+# -----------------------------------------------------------------------------
+
+<http://example.org/okb/kb_clinical_safety>
+    a dcat:Dataset ;
+    dct:title "kb_clinical_safety" ;
+    dct:description "Clinical safety obligations for AI-assisted oncology diagnosis systems under EU MDR 2017/745, FDA CDS Guidance, and WHO AI Health Ethics" ;
+    dct:version "1.0.0" ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dct:publisher [
+        a foaf:Organization ;
+        foaf:name "Open Systems Collective" ;
+    ] ;
+    dct:issued "2026-03-29"^^xsd:date ;
+    dct:source <https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R0745> ;
+    dct:references "EU MDR 2017/745 Annex XV" , "FDA CDS Guidance (2022)" , "WHO Ethics and Governance of AI for Health (2021)" ;
+    dcat:distribution [
+        a dcat:Distribution ;
+        dcat:mediaType "text/turtle" ;
+        dcat:downloadURL <http://example.org/okb/kb_clinical_safety/schema.ttl> ;
+    ] ;
+    dcat:keyword "clinical safety" , "oncology" , "EU MDR" , "FDA CDS" , "WHO AI Health" , "medical AI" , "compliance" .

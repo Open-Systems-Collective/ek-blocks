@@ -34,6 +34,16 @@ ek-blocks/
         full_oversight.ttl      #   Passing evidence graph
       violate/
         no_override.ttl         #   Failing evidence graph
+  kb_clinical_safety/           # EU MDR 2017/745, FDA CDS, WHO AI Health
+    schema.ttl                  #   RDF/OWL vocabulary
+    shapes.ttl                  #   SHACL constraint shapes
+    metadata.ttl                #   DCAT-AP metadata
+    README.md                   #   Block documentation
+    tests/
+      conform/
+        full_clinical.ttl       #   Passing evidence graph
+      violate/
+        no_uncertainty.ttl      #   Failing evidence graph
 ```
 
 ## Available Blocks
@@ -41,6 +51,7 @@ ek-blocks/
 | Block | Regulation | Description |
 |-------|-----------|-------------|
 | [kb_human_oversight](kb_human_oversight/) | EU AI Act Art. 14 | Human oversight obligations for high-risk AI systems |
+| [kb_clinical_safety](kb_clinical_safety/) | EU MDR 2017/745, FDA CDS, WHO 2021 | Clinical safety obligations for AI-assisted oncology diagnosis |
 
 ## Quick Start: Validate with pyshacl
 
