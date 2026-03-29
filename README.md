@@ -87,6 +87,10 @@ pyshacl -s kb_human_oversight/shapes.ttl \
 
 New blocks are welcome. Each block should follow the canonical structure shown above and include both conformant and non-conformant test graphs. See any existing block for a template.
 
+## AI-Assisted Development
+
+This repository uses AI-assisted development tooling. See [AI_DISCLOSURE.md](AI_DISCLOSURE.md) for details.
+
 ## License
 
 CC-BY 4.0
